@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: decision-deployment
+  labels:
+    app: decision
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: decision
+  template:
+    metadata:
+      labels:
+        app: decision
+    spec:
+      imagePullSecrets:
+      - name: repo-key
+      containers:
+      - name: decision
+        image: {{ .Values.app.image }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.app.port }}

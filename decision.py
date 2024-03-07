@@ -5,7 +5,7 @@ import random
 import redis
 
 #Controller database connexion setup
-redis_host=os.environ.get('DATABASE_URL')
+redis_host=""
 redis_port=6379
 r = redis.StrictRedis(host=redis_host, port=redis_port, decode_responses=True)
 
@@ -120,6 +120,11 @@ async def store_data(data: dict):
      except Exception as e:
          raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/init")
+async def set_service_endpoint(data: dict):
+    global redis_host
+    redis_host = data["db_endpoint"] 
+    print(f"Endpoints initialisation Done")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080)

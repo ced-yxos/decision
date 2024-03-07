@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: decision-service
+spec:
+  selector:
+    app: decision
+  type: {{ .Values.app.service.type }}
+  ports:
+  - protocol: {{ .Values.app.service.protocol }}
+    port: 8080
+    targetPort: {{ .Values.app.port }}
+    nodePort: {{ .Values.app.service.servicePort }}

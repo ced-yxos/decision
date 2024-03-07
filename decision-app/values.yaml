@@ -1,0 +1,8 @@
+app:
+  replicaCount: 1
+  image: yxos/localdata
+  port: 8080
+  service:
+    type: NodePort
+    servicePort: 31002
+    protocol: TCP

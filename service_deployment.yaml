@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: decision-deployment
+  labels:
+    app: decision
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: decision
+  template:
+    metadata:
+      labels:
+        app: decision
+    spec:
+      imagePullSecrets:
+      - name: repo-key
+      containers:
+      - name: decision
+        image: yxos/localdata
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: decision-service
+spec:
+  selector:
+    app: decision
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    nodePort: 31002
