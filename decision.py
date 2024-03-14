@@ -3,6 +3,7 @@ import uvicorn
 import time, os
 import random
 import redis
+import requests
 
 #Controller database connexion setup
 redis_host=""
@@ -122,7 +123,7 @@ async def store_data(data: dict):
 
 @app.post("/init")
 async def set_service_endpoint(data: dict):
-    global redis_host
+    global redis_host, r
     redis_host = data["db_endpoint"] 
     print(f"Endpoints initialisation Done")
 
