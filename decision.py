@@ -126,7 +126,6 @@ async def set_service_endpoint(data: dict):
     global redis_host, r
     redis_host = data["db_endpoint"] 
     r = redis.StrictRedis(host=redis_host, port=redis_port, decode_responses=True)
-
     print(f"Endpoints initialisation Done")
 
 if __name__ == "__main__":
