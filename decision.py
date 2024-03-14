@@ -129,5 +129,5 @@ async def set_service_endpoint(data: dict):
     print(f"Endpoints initialisation Done")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host="0.0.0.0", port=7000)
     print("server running")
